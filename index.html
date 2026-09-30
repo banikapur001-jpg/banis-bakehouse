@@ -11,16 +11,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --bg-cream: #fff9fa;
-      --pink-soft: #ffeef2;
-      --pink-card: #ffffff;
-      --pink-accent: #f48fb1;
-      --pink-deep: #d81b60;
-      --text-dark: #3a2e39;
-      --text-muted: #7b6d7a;
-      --border-pink: #f8bbd0;
-      --shadow: 0 10px 25px rgba(216, 27, 96, 0.08);
+:root {
+      --bg-cream: #fffaf8;         /* Crisp background with subtle warmth */
+      --peach-warm: #ffe5d9;       /* Brand Peach: Header tint */
+      --pink-soft: #ffcad4;        /* Brand Blush: Highlights & soft borders */
+      --pink-accent: #f4acb7;      /* Brand Rose: Active borders, icons, & hover */
+      --mauve-deep: #9d8189;       /* Brand Dusty Mauve: Headings & titles */
+      --sage-subtle: #d8e2dc;      /* Brand Sage: Badges & subtle accents */
+      --text-dark: #43363a;        /* Deep contrast tone for clean readability */
+      --text-muted: #826f74;       /* Muted mauve for subtitles */
+      --shadow: 0 10px 25px rgba(157, 129, 137, 0.12);
       --radius: 20px;
     }
 
@@ -41,21 +41,43 @@
     /* Header */
     header {
       text-align: center;
-      padding: 50px 20px 30px;
-      background: linear-gradient(180deg, #ffe3ec 0%, var(--bg-cream) 100%);
+      padding: 45px 20px 25px;
+      background: linear-gradient(180deg, var(--peach-warm) 0%, var(--bg-cream) 100%);
+    }
+
+    .bakery-logo {
+      width: 110px;
+      height: 110px;
+      object-fit: contain;
+      border-radius: 50%;
+      border: 3px solid var(--pink-soft);
+      box-shadow: var(--shadow);
+      background-color: #ffffff;
+      margin-bottom: 12px;
+      padding: 6px;
     }
 
     .badge {
       display: inline-block;
-      background-color: #fff;
-      color: var(--pink-deep);
+      background-color: var(--sage-subtle);
+      color: var(--text-dark);
       padding: 6px 16px;
       border-radius: 50px;
       font-size: 0.85rem;
       font-weight: 700;
       letter-spacing: 0.5px;
       margin-bottom: 12px;
-      border: 1px solid var(--border-pink);
+      border: 1px solid #c7d4cd;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      color: var(--mauve-deep);
+      margin-bottom: 8px;
+    }
+    
+    border: 1px solid var(--border-pink);
     }
 
     h1 {
@@ -248,8 +270,10 @@
   </style>
 </head>
 <body>
-
-  <header>
+<header>
+    <!-- Logo element -->
+    <img src="logo.png" alt="Bani's Bakehouse Logo" class="bakery-logo" />
+    <br />
     <span class="badge">Artisanal & Homecrafted</span>
     <h1>Bani's Bakehouse</h1>
     <p class="tagline">Warm treats, delicate flavours, and handcrafted celebration cakes made fresh for your sweetest memories.</p>
