@@ -422,7 +422,7 @@
 
   <script>
     // Set your verified WhatsApp phone number here (digits only, country code 91)
-    const BAKEHOUSE_PHONE = "9654148896"; 
+    const BAKEHOUSE_PHONE = "919654148896"; 
 
     // Complete Menu Data from your price list
     const MENU_DATA = {
@@ -536,8 +536,7 @@
     window.onload = function() {
       pickCategory("Cookies");
     };
-
-    function orderOnWhatsApp() {
+function orderOnWhatsApp() {
       const selectedItem = document.getElementById('selectedProduct').value;
       const size = document.getElementById('size').value;
       const date = document.getElementById('date').value;
@@ -551,8 +550,8 @@
 
       const cleanPhone = BAKEHOUSE_PHONE.replace(/[^0-9]/g, '');
 
-      if (!cleanPhone || cleanPhone === "9654148896") {
-        alert("Please update BAKEHOUSE_PHONE with your actual WhatsApp phone number.");
+      if (!cleanPhone) {
+        alert("Phone number is missing.");
         return;
       }
 
