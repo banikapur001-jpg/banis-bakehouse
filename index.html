@@ -11,14 +11,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
 
   <style>
+    /* Brand Colour Palette */
     :root {
       --bg-cream: #fffaf8;         /* Page background */
-      --peach-warm: #ffe5d9;       /* Swatch 2: Header tint & card backgrounds */
-      --pink-soft: #ffcad4;        /* Swatch 3: Soft borders & highlights */
+      --peach-warm: #ffe5d9;       /* Swatch 2: Header gradient & highlights */
+      --pink-soft: #ffcad4;        /* Swatch 3: Soft borders & card accents */
       --pink-accent: #f4acb7;      /* Swatch 4: Active borders & button hover */
       --mauve-deep: #9d8189;       /* Swatch 5: Headings & branding */
-      --sage-subtle: #d8e2dc;      /* Swatch 1: Badges & subtle accents */
-      --text-dark: #43363a;        /* High-contrast text */
+      --sage-subtle: #d8e2dc;      /* Swatch 1: Badges & subtle tags */
+      --text-dark: #43363a;        /* High-contrast readable body text */
       --text-muted: #826f74;       /* Subtitle & label tone */
       --shadow: 0 10px 25px rgba(157, 129, 137, 0.12);
       --radius: 20px;
@@ -38,6 +39,7 @@
       padding-bottom: 60px;
     }
 
+    /* Form controls & typography */
     select, input, textarea, button {
       font-family: 'Quicksand', sans-serif;
     }
@@ -93,7 +95,7 @@
       font-weight: 500;
     }
 
-    /* Container */
+    /* Main Container */
     .container {
       max-width: 1100px;
       margin: 0 auto;
@@ -107,26 +109,27 @@
       margin: 40px 0 22px;
     }
 
-    /* Categories Grid */
+    /* Category Cards Grid */
     .menu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 16px;
-      margin-bottom: 40px;
+      margin-bottom: 25px;
     }
 
     .product-card {
       background: #ffffff;
       border: 2px solid var(--pink-soft);
       border-radius: var(--radius);
-      padding: 20px 16px;
+      padding: 22px 16px;
       text-align: center;
       cursor: pointer;
       transition: all 0.25s ease;
       box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: center;
+      align-items: center;
     }
 
     .product-card:hover {
@@ -137,7 +140,7 @@
     .product-card.selected {
       border-color: var(--pink-accent);
       background-color: #fff4f6;
-      box-shadow: 0 12px 28px rgba(157, 129, 137, 0.2);
+      box-shadow: 0 12px 28px rgba(157, 129, 137, 0.22);
     }
 
     .product-icon {
@@ -150,43 +153,57 @@
       font-size: 1.15rem;
       font-weight: 700;
       color: var(--text-dark);
-      margin-bottom: 10px;
+      margin-bottom: 4px;
     }
 
-    /* Dropdown inside Category Card */
-    .category-dropdown-wrapper {
-      margin-top: 12px;
-      text-align: left;
-    }
-
-    .dropdown-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--mauve-deep);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .card-select {
-      width: 100%;
-      padding: 9px 10px;
-      border: 1.5px solid var(--pink-soft);
-      border-radius: 10px;
+    .product-price {
       font-size: 0.85rem;
-      background-color: #ffffff;
+      font-weight: 600;
+      color: var(--mauve-deep);
+    }
+
+    /* Variety Selector Box (Directly below category cards) */
+    .variety-selector-box {
+      background: #ffffff;
+      border: 2px solid var(--pink-soft);
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin: 0 auto 35px;
+      max-width: 650px;
+      box-shadow: var(--shadow);
+    }
+
+    .variety-label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--mauve-deep);
+      margin-bottom: 8px;
+    }
+
+    .variety-label span {
+      color: var(--text-dark);
+      text-decoration: underline;
+    }
+
+    #subcategorySelect {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--pink-accent);
+      border-radius: 12px;
+      font-size: 1rem;
+      background-color: #fffdfd;
       color: var(--text-dark);
       cursor: pointer;
       outline: none;
       transition: border-color 0.2s;
     }
 
-    .card-select:focus {
-      border-color: var(--pink-accent);
+    #subcategorySelect:focus {
+      border-color: var(--mauve-deep);
     }
 
-    /* Order Form */
+    /* Order Form Box */
     .order-box {
       background: #ffffff;
       border: 2px dashed var(--pink-soft);
@@ -285,8 +302,8 @@
         flex-direction: column;
         gap: 0;
       }
-      .order-box {
-        padding: 24px 18px;
+      .order-box, .variety-selector-box {
+        padding: 22px 16px;
       }
       h1 {
         font-size: 2.2rem;
@@ -309,116 +326,66 @@
   </header>
 
   <div class="container">
-    <h2 class="section-title">1. Select Category & Flavour</h2>
+    <h2 class="section-title">1. Select Category & Variety</h2>
     
+    <!-- 5 Category Cards -->
     <div class="menu-grid" id="menuGrid">
-
-      <!-- 1. Cookies -->
-      <div class="product-card selected" onclick="selectCategory('Cookies', this)">
-        <div>
-          <span class="product-icon">🍪</span>
-          <div class="product-name">Cookies</div>
-        </div>
-        <div class="category-dropdown-wrapper">
-          <label class="dropdown-label">Flavour / Item:</label>
-          <select class="card-select" onchange="onFlavourChange('Cookies', this.value, event)">
-            <option value="Dark chocolate chip (₹60)">Dark chocolate chip — ₹60</option>
-            <option value="White chocolate and cranberry (₹70)">White chocolate & cranberry — ₹70</option>
-            <option value="Cranberry and pistachio (₹90)">Cranberry & pistachio — ₹90</option>
-            <option value="Double dark chocolate chip (₹70)">Double dark chocolate chip — ₹70</option>
-          </select>
-        </div>
+      <div class="product-card selected" onclick="pickCategory('Cookies')">
+        <span class="product-icon">🍪</span>
+        <div class="product-name">Cookies</div>
+        <div class="product-price">From ₹60</div>
       </div>
 
-      <!-- 2. Tea cakes -->
-      <div class="product-card" onclick="selectCategory('Tea cakes', this)">
-        <div>
-          <span class="product-icon">🥮</span>
-          <div class="product-name">Tea cakes</div>
-        </div>
-        <div class="category-dropdown-wrapper">
-          <label class="dropdown-label">Flavour / Item:</label>
-          <select class="card-select" onchange="onFlavourChange('Tea cakes', this.value, event)">
-            <option value="Vanilla (₹350)">Vanilla — ₹350</option>
-            <option value="Chocolate (₹400)">Chocolate — ₹400</option>
-            <option value="Lemon (₹500)">Lemon — ₹500</option>
-            <option value="Dates and walnut (₹500)">Dates & walnut — ₹500</option>
-            <option value="Banana bread (₹400)">Banana bread — ₹400</option>
-          </select>
-        </div>
+      <div class="product-card" onclick="pickCategory('Tea cakes')">
+        <span class="product-icon">🥮</span>
+        <div class="product-name">Tea cakes</div>
+        <div class="product-price">From ₹350</div>
       </div>
 
-      <!-- 3. Cake jars -->
-      <div class="product-card" onclick="selectCategory('Cake jars', this)">
-        <div>
-          <span class="product-icon">🫙</span>
-          <div class="product-name">Cake jars</div>
-        </div>
-        <div class="category-dropdown-wrapper">
-          <label class="dropdown-label">Flavour / Item:</label>
-          <select class="card-select" onchange="onFlavourChange('Cake jars', this.value, event)">
-            <option value="Chocolate and berries (₹350)">Chocolate & berries — ₹350</option>
-            <option value="Chocolate truffle (₹350)">Chocolate truffle — ₹350</option>
-            <option value="Mixed berries (₹350)">Mixed berries — ₹350</option>
-            <option value="Tiramisu (₹350)">Tiramisu — ₹350</option>
-          </select>
-        </div>
+      <div class="product-card" onclick="pickCategory('Cake jars')">
+        <span class="product-icon">🫙</span>
+        <div class="product-name">Cake jars</div>
+        <div class="product-price">₹350 each</div>
       </div>
 
-      <!-- 4. Frosted cakes -->
-      <div class="product-card" onclick="selectCategory('Frosted cakes', this)">
-        <div>
-          <span class="product-icon">🎂</span>
-          <div class="product-name">Frosted cakes</div>
-        </div>
-        <div class="category-dropdown-wrapper">
-          <label class="dropdown-label">Flavour / Item:</label>
-          <select class="card-select" onchange="onFlavourChange('Frosted cakes', this.value, event)">
-            <option value="Chocolate truffle (₹650/₹1200)">Chocolate truffle — ₹650 / ₹1200</option>
-            <option value="Black Forest (₹650/₹1200)">Black Forest — ₹650 / ₹1200</option>
-            <option value="Lemon and Blueberry (₹1000/₹2000)">Lemon & Blueberry — ₹1000 / ₹2000</option>
-            <option value="Mixed berries (₹1000/₹2000)">Mixed berries — ₹1000 / ₹2000</option>
-            <option value="Banoffe cake (₹800/₹1500)">Banoffe cake — ₹800 / ₹1500</option>
-          </select>
-        </div>
+      <div class="product-card" onclick="pickCategory('Frosted cakes')">
+        <span class="product-icon">🎂</span>
+        <div class="product-name">Frosted cakes</div>
+        <div class="product-price">From ₹650</div>
       </div>
 
-      <!-- 5. Beyond cakes -->
-      <div class="product-card" onclick="selectCategory('Beyond cakes', this)">
-        <div>
-          <span class="product-icon">✨</span>
-          <div class="product-name">Beyond cakes</div>
-        </div>
-        <div class="category-dropdown-wrapper">
-          <label class="dropdown-label">Flavour / Item:</label>
-          <select class="card-select" onchange="onFlavourChange('Beyond cakes', this.value, event)">
-            <option value="Chocolate éclair (₹180)">Chocolate éclair — ₹180</option>
-            <option value="Dark Chocolate tart (₹600)">Dark Chocolate tart — ₹600</option>
-            <option value="Banoffee pie (₹600)">Banoffee pie — ₹600</option>
-          </select>
-        </div>
+      <div class="product-card" onclick="pickCategory('Beyond cakes')">
+        <span class="product-icon">✨</span>
+        <div class="product-name">Beyond cakes</div>
+        <div class="product-price">From ₹180</div>
       </div>
+    </div>
 
+    <!-- Variety / Flavour Dropdown Box -->
+    <div class="variety-selector-box">
+      <label for="subcategorySelect" class="variety-label">
+        Choose Flavour / Item for <span id="activeCategoryName">Cookies</span>:
+      </label>
+      <select id="subcategorySelect" onchange="onFlavourSelected()">
+        <!-- Options populated dynamically by JavaScript -->
+      </select>
     </div>
 
     <!-- Order Form -->
     <div class="order-box">
       <h2>2. Customise & Order</h2>
 
-      <!-- Active Selection (Category + Flavour) -->
+      <!-- Active Selection Summary -->
       <div class="form-group">
         <label>Selected Treat & Flavour</label>
-        <input type="text" id="selectedProduct" value="Cookies — Dark chocolate chip (₹60)" readonly style="background-color: var(--peach-warm); font-weight: 700;">
+        <input type="text" id="selectedProduct" value="Cookies — Dark chocolate chip — ₹60" readonly style="background-color: var(--peach-warm); font-weight: 700;">
       </div>
 
       <!-- Size / Quantity Selection -->
       <div class="form-group">
         <label for="size">Size / Quantity *</label>
         <select id="size">
-          <option value="1 piece">1 piece</option>
-          <option value="Box of 4">Box of 4</option>
-          <option value="Box of 6" selected>Box of 6</option>
-          <option value="Box of 12">Box of 12</option>
+          <!-- Populated dynamically based on category -->
         </select>
       </div>
 
@@ -454,54 +421,156 @@
   </div>
 
   <script>
-    // Replace with your verified WhatsApp number (digits only, country code 91)
+    // Set your verified WhatsApp phone number here (digits only, country code 91)
     const BAKEHOUSE_PHONE = "919654148896"; 
 
-    let currentCategory = "Cookies";
-    let currentFlavour = "Dark chocolate chip (₹60)";
+    // Complete Menu Data from your price list
+    const MENU_DATA = {
+      "Cookies": {
+        items: [
+          "Dark chocolate chip — ₹60",
+          "White chocolate and cranberry — ₹70",
+          "Cranberry and pistachio — ₹90",
+          "Double dark chocolate chip — ₹70"
+        ],
+        sizes: ["1 piece", "Box of 4", "Box of 6", "Box of 12"]
+      },
+      "Tea cakes": {
+        items: [
+          "Vanilla — ₹350",
+          "Chocolate — ₹400",
+          "Lemon — ₹500",
+          "Dates and walnut — ₹500",
+          "Banana bread — ₹400"
+        ],
+        sizes: ["1 Loaf (Standard)", "2 Loaves", "3 Loaves"]
+      },
+      "Cake jars": {
+        items: [
+          "Chocolate and berries — ₹350",
+          "Chocolate truffle — ₹350",
+          "Mixed berries — ₹350",
+          "Tiramisu — ₹350"
+        ],
+        sizes: ["1 Jar", "Pack of 2", "Pack of 4"]
+      },
+      "Frosted cakes": {
+        items: [
+          "Chocolate truffle — ₹650 (0.5 kg) / ₹1200 (1 kg)",
+          "Black Forest — ₹650 (0.5 kg) / ₹1200 (1 kg)",
+          "Lemon and Blueberry — ₹1000 (0.5 kg) / ₹2000 (1 kg)",
+          "Mixed berries — ₹1000 (0.5 kg) / ₹2000 (1 kg)",
+          "Banoffe cake — ₹800 (0.5 kg) / ₹1500 (1 kg)"
+        ],
+        sizes: ["0.5 kg", "1 kg", "1.5 kg", "2 kg"]
+      },
+      "Beyond cakes": {
+        items: [
+          "Chocolate éclair — ₹180",
+          "Dark Chocolate tart — ₹600",
+          "Banoffee pie — ₹600"
+        ],
+        sizes: ["Quantity: 1", "Quantity: 2", "Quantity: 4", "Box / Platter"]
+      }
+    };
 
-    // Default tomorrow's date for date picker
+    let currentCategory = "Cookies";
+
+    // Set tomorrow's date by default
     const dateInput = document.getElementById('date');
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     dateInput.value = tomorrow.toISOString().split('T')[0];
     dateInput.min = new Date().toISOString().split('T')[0];
 
-    function selectCategory(categoryName, cardElement) {
+    // Pick a Category
+    function pickCategory(categoryName) {
       currentCategory = categoryName;
 
-      document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
-      cardElement.classList.add('selected');
+      // Update card visual active state
+      const cards = document.querySelectorAll('.product-card');
+      cards.forEach(card => {
+        const title = card.querySelector('.product-name').innerText;
+        if (title.trim().toLowerCase() === categoryName.trim().toLowerCase()) {
+          card.classList.add('selected');
+        } else {
+          card.classList.remove('selected');
+        }
+      });
 
-      const dropdown = cardElement.querySelector('.card-select');
-      if (dropdown) {
-        currentFlavour = dropdown.value;
-      }
+      // Update dynamic category label in selector
+      document.getElementById('activeCategoryName').innerText = categoryName;
 
-      updateDisplayAndSizes(categoryName);
-    }
+      // Populate subcategory / flavour options
+      const subSelect = document.getElementById('subcategorySelect');
+      subSelect.innerHTML = "";
+      MENU_DATA[categoryName].items.forEach(item => {
+        const opt = document.createElement('option');
+        opt.value = item;
+        opt.innerText = item;
+        subSelect.appendChild(opt);
+      });
 
-    function onFlavourChange(categoryName, flavourValue, event) {
-      if (event) event.stopPropagation(); // Prevents re-triggering card click
-      currentCategory = categoryName;
-      currentFlavour = flavourValue;
-
-      const card = event.target.closest('.product-card');
-      if (card) {
-        document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
-        card.classList.add('selected');
-      }
-
-      updateDisplayAndSizes(categoryName);
-    }
-
-    function updateDisplayAndSizes(category) {
-      document.getElementById('selectedProduct').value = `${category} —${currentFlavour}`;
+      // Populate size options
       const sizeSelect = document.getElementById('size');
+      sizeSelect.innerHTML = "";
+      MENU_DATA[categoryName].sizes.forEach((sz, idx) => {
+        const opt = document.createElement('option');
+        opt.value = sz;
+        opt.innerText = sz;
+        if (idx === 0) opt.selected = true;
+        sizeSelect.appendChild(opt);
+      });
 
-      if (category === 'Frosted cakes') {
-        sizeSelect.innerHTML = `
-          <option value="0.5 kg" selected>0.5 kg</option>
-          <option value="1 kg">1 kg</option>
-          <option value="1.5 kg">1.5 kg</option>
-          <option value="
+      onFlavourSelected();
+    }
+
+    // Update active selection display field
+    function onFlavourSelected() {
+      const subSelect = document.getElementById('subcategorySelect');
+      const chosenItem = subSelect.value;
+      document.getElementById('selectedProduct').value = `${currentCategory} — ${chosenItem}`;
+    }
+
+    // Initialize with Cookies on first load
+    window.onload = function() {
+      pickCategory("Cookies");
+    };
+
+    function orderOnWhatsApp() {
+      const selectedItem = document.getElementById('selectedProduct').value;
+      const size = document.getElementById('size').value;
+      const date = document.getElementById('date').value;
+      const occasion = document.getElementById('occasion').value.trim() || "Not specified";
+      const message = document.getElementById('message').value.trim() || "None";
+
+      if (!date) {
+        alert("Please select your required delivery/pickup date.");
+        return;
+      }
+
+      const cleanPhone = BAKEHOUSE_PHONE.replace(/[^0-9]/g, '');
+
+      if (!cleanPhone || cleanPhone === "919654148896") {
+        alert("Please update BAKEHOUSE_PHONE with your actual WhatsApp phone number.");
+        return;
+      }
+
+      const text = 
+`Hi Bani's Bakehouse! 🧁 I would like to place an order:
+
+✨ *Category & Item:* ${selectedItem}
+⚖️ *Size / Quantity:* ${size}
+📅 *Required Date:* ${date}
+🎉 *Occasion:* ${occasion}
+✍️ *Message / Notes:* ${message}
+
+Could you please confirm availability and payment details? Thank you!`;
+
+      const encodedText = encodeURIComponent(text);
+      const waUrl = `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodedText}`;
+      window.location.href = waUrl;
+    }
+  </script>
+</body>
+</html>
